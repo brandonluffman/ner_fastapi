@@ -8,15 +8,14 @@ from pydantic import BaseModel
 
 app = FastAPI()
 # nlp = spacy.load('./output/model-last')
-# origins = ["*"]
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-#     allow_origins=origins,
-# )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 class TextInput(BaseModel):
     text: str
 
