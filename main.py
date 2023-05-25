@@ -7,7 +7,7 @@ from pydantic import BaseModel
 
 
 app = FastAPI()
-nlp = spacy.load('./output/model-last')
+# nlp = spacy.load('./output/model-last')
 # origins = ["*"]
 
 # app.add_middleware(
@@ -29,11 +29,12 @@ class Entity(BaseModel):
 @app.post("/model")
 async def ner_model(text_input: TextInput):
     text = text_input.text
-    doc = nlp(text)
+    # doc = nlp(text)
 
-    entities = []
-    for entity in doc.ents:
-        entities.append(Entity(text=entity.text, start=entity.start_char, end=entity.end_char, label=entity.label_))
+    # entities = []
+    # for entity in doc.ents:
+    #     entities.append(Entity(text=entity.text, start=entity.start_char, end=entity.end_char, label=entity.label_))
 
-    return entities, text
+    # return entities, text
     
+    return text
