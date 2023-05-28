@@ -10,6 +10,7 @@ import tempfile
 
 # Initialize FastAPI
 app = FastAPI()
+nlp = spacy.load('en_core_web_sm')
 
 # Configure CORS
 app.add_middleware(
@@ -38,5 +39,11 @@ class TextInput(BaseModel):
 @app.post("/model")
 async def ner_model(text_input: TextInput):
     text = text_input.text
+    doc = nlp(text)
 
-    return text
+    entities = []
+    for entity in doc.ents:
+        entities.append(Entity(text=entity.text, start=entity.start_char, end=entity.end_char, label=entity.label_))
+
+    return entities, text
+    # return text
